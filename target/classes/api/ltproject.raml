@@ -1,0 +1,157 @@
+#%RAML 1.0
+title: ltproject
+/orderDetails:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: array
+            items:
+              type: object
+            examples:
+              values:
+                  [
+                    {
+                      "Id" : 123,
+                      "productName" : "Sweat Shirt",
+                      "productType" : "Clothing",
+                      "quantiyAvailable" : 20,
+                      "pricePerItem" : 2500
+                    },
+                    {
+                      "Id" : 456,
+                      "productName" : "Sweat Shirt",
+                      "productType": "Clothing",
+                      "quantiyAvailable" : 30,
+                      "pricePerItem" : 4500
+                    },
+                    {
+                      Id : 789,
+                      productName : "Sweat Shirt",
+                      productType : "Clothing",
+                      quantiyAvailable : 10,
+                      pricePerItem : 3500
+                    }
+                  ]
+  /{orderid}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              example:
+                 {
+                  Id : 123,
+                  productName : "Sweat Shirt",
+                  productType : "Clothing",
+                  quantiyAvailable : 20,
+                  pricePerItem : 2500
+                }    
+/creatorder:
+  post:
+    queryParameters:
+      ordeType:
+        required: true
+    body:
+      application/json:
+        type: array
+        items:
+          type: object
+          properties:
+            Id:
+              type: number
+              required: true
+            productName:
+              type: string
+              required: true
+              maxLength: 10
+              minLength: 3
+            quantityAvailable:
+              type: number
+              default: 0
+            pricePerItem:
+              type: number
+              required: false
+        examples:
+            values: 
+             [
+              {
+                  "Id" : 123,
+                  "productName" : "abc",
+                  "quantityAvailable" : 12,
+                  "pricePerItem" : 10
+                }, 
+                { 
+                    "Id": 456,
+                    "productName": "xyz",
+                    "quantityAvailable": 30,
+                    "pricePerItem": 43
+                }
+              ]
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "message" : "order123 creatd successfully"
+              }
+/updateOrder:
+  put:
+    queryParameters:
+      orderid:
+        required: true
+      orderType:
+        required: true
+    body:
+      application/json:
+        type: object
+        properties:
+          productName:
+            type: string
+            minLength: 3
+            maxLength: 10
+            required: true
+          quantityAvailable:
+            type: number
+            default: 0
+          pricePerItem:
+            type: number
+            required: false
+        example:
+          value:
+                productName: abc
+                quantityAvailable: 12
+                pricePerItem: 3
+    responses:
+      202:
+        body:
+          application/json:
+            example:
+              message:"order123updated"
+/DELETE:
+  delete:
+    queryParameters:
+      Orderid:
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message : "order123 deleted successfully"
+          
+      
+
+
+              
+
+
+
+
+            
+      
+
+              

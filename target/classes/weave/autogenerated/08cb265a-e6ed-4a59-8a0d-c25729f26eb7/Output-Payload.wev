@@ -1,0 +1,4 @@
+%dw 2.0
+
+type auto_08cb265a_e6ed_4a59_8a0d_c25729f26eb7_Output_Payload = Array<{ _?: Any }>
+
